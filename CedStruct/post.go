@@ -4,8 +4,8 @@ import (
 	"CedBlog/CedUtils"
 	// "fmt"
 	// "strings"
-	"time"
 	"os"
+	"time"
 )
 
 type Post struct {
@@ -23,7 +23,7 @@ func (p *Post) New(name string) (err error) {
 		os.Mkdir("public", 0755)
 	}
 	// 创建文件失败error
-	file, err := os.OpenFile("public/" +name, os.O_WRONLY|os.O_CREATE, 0755)
+	file, err := os.OpenFile("public/"+name, os.O_WRONLY|os.O_CREATE, 0755)
 	defer file.Close()
 	if err != nil {
 		return err
@@ -31,5 +31,18 @@ func (p *Post) New(name string) (err error) {
 	p.path = name
 	p.fileName = name
 	_, err = file.Write([]byte(p.fileName))
+	return nil
+}
+
+func (p *Post) Delete(name string) (err error) {
+	if !CedUtils.Exist("public") {
+		os.Mkdir("public", 0755)
+	}
+	if CedUtils.Exist("public/" + name) {
+		err := os.Remove("public/" + name)
+		if err != nil {
+			return err
+		}
+	}
 	return nil
 }
