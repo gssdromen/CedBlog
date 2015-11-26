@@ -6,10 +6,7 @@ import (
 )
 
 func main() {
-	fmt.Println("in")
 	config := new(CedStruct.Config)
-	err := config.Read()
-	if err != nil {
-		panic(err)
-	}
+	config = config.Read()
+	fmt.Println(config.BaseUrl)
 }

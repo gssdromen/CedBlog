@@ -3,6 +3,7 @@ package CedStruct
 import (
 	"CedBlog/CedUtils"
 	"encoding/json"
+	"io/ioutil"
 	"os"
 )
 
@@ -53,13 +54,13 @@ func (c *Config) Read() *Config {
 		if err != nil {
 			return nil
 		}
-		data := make([]byte, 10)
-		_, err = file.Read(data)
+		defer file.Close()
+		data, err := ioutil.ReadAll(file)
 		if err != nil {
 			return nil
 		}
-		x, y := json.Unmarshal(data, c)
-		if x == nil {
+		err = json.Unmarshal(data, c)
+		if err != nil {
 			return nil
 		}
 		return c
@@ -67,4 +68,5 @@ func (c *Config) Read() *Config {
 		c.New()
 		c.Read()
 	}
+	return c
 }
