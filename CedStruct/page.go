@@ -1,9 +1,9 @@
 package CedStruct
 
 import (
-	"fmt"
+// 	"fmt"
 )
 
-func (p *Page) New() {
-
-}
+// func (p *Page) New() {
+//
+// }

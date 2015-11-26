@@ -2,7 +2,7 @@ package CedStruct
 
 import (
 	"CedBlog/CedUtils"
-	// "fmt"
+	"fmt"
 	// "strings"
 	"os"
 	"time"
@@ -22,8 +22,12 @@ func (p *Post) New(name string) (err error) {
 	if !CedUtils.Exist("public") {
 		os.Mkdir("public", 0755)
 	}
+	if CedUtils.Exist("public/" + name) {
+		fmt.Println("File is Exist")
+		return
+	}
 	// 创建文件失败error
-	file, err := os.OpenFile("public/"+name, os.O_WRONLY|os.O_CREATE, 0755)
+	file, err := os.OpenFile("public/"+name, os.O_WRONLY|os.O_CREATE, 0644)
 	defer file.Close()
 	if err != nil {
 		return err

@@ -6,9 +6,9 @@ import (
 )
 
 func main() {
-	fmt.Println("hello")
-	post := new(CedStruct.Post)
-	err := post.New("bishisisi.md")
+	fmt.Println("in")
+	config := new(CedStruct.Config)
+	err := config.Read()
 	if err != nil {
 		panic(err)
 	}
