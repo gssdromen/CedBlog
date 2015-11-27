@@ -11,3 +11,21 @@ func Exist(filename string) bool {
 	return err == nil || os.IsExist(err)
 }
 
+func FilesInDir(dirPath string) ([]string, error) {
+	if !Exist(dirPath) {
+		return nil, nil
+	}
+	file, err := os.Open(dirPath)
+	if err != nil {
+		return nil, err
+	}
+	var result []string
+	files, err := file.Readdir(-1)
+	for i := 0; i < len(files); i++ {
+		aFile := files[i]
+		if !aFile.IsDir() {
+			result = append(result, aFile.Name())
+		}
+	}
+	return result, nil
+}
