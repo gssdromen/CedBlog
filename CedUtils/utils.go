@@ -11,6 +11,16 @@ func Exist(filename string) bool {
 	return err == nil || os.IsExist(err)
 }
 
+func Remove(filename string) error {
+	if Exist(filename) {
+		err := os.Remove(filename)
+		if err != nil {
+			return err
+		}
+	}
+	return nil
+}
+
 func FilesInDir(dirPath string) ([]string, error) {
 	if !Exist(dirPath) {
 		return nil, nil

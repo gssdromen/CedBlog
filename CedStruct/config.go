@@ -14,6 +14,7 @@ type Config struct {
 	ConfigDir   string `json:"config_dir"`
 	TemplateDir string `json:"template_dir"`
 	PublicDir   string `json:"public_dir"`
+	ContentDir  string `json:"content_dir"`
 	Favicon     string `json:"favicon"`
 }
 
@@ -24,6 +25,7 @@ func (c *Config) New() error {
 	c.BasePath = "/Users/cedricwu/Document/Go/src/CedBlog/"
 	c.TemplateDir = "templates/"
 	c.PublicDir = "public/"
+	c.ContentDir = "content/"
 	str, err := json.Marshal(*c)
 	if err != nil {
 		return err

@@ -4,6 +4,7 @@ import (
 	"CedBlog/CedUtils"
 	"fmt"
 	"os"
+	"path/filepath"
 	"time"
 )
 
@@ -21,12 +22,12 @@ func (p *Post) New(name string) (err error) {
 	if !CedUtils.Exist("public") {
 		os.Mkdir("public", 0755)
 	}
-	if CedUtils.Exist("public/" + name) {
+	if CedUtils.Exist(filepath.Join("public", name)) {
 		fmt.Println("File is Exist")
 		return
 	}
 	// 创建文件失败error
-	file, err := os.OpenFile("public/"+name, os.O_WRONLY|os.O_CREATE, 0644)
+	file, err := os.OpenFile(filepath.Join("public", name), os.O_WRONLY|os.O_CREATE, 0644)
 	defer file.Close()
 	if err != nil {
 		return err
@@ -41,8 +42,8 @@ func (p *Post) Delete(name string) (err error) {
 	if !CedUtils.Exist("public") {
 		os.Mkdir("public", 0755)
 	}
-	if CedUtils.Exist("public/" + name) {
-		err := os.Remove("public/" + name)
+	if CedUtils.Exist(filepath.Join("public", name)) {
+		err := os.Remove(filepath.Join("public", name))
 		if err != nil {
 			return err
 		}

@@ -18,7 +18,10 @@ func main() {
 			NewPost(flag.Args()[1])
 		}
 		if flag.Args()[0] == "go" {
-			Go(config)
+			err := Go(config)
+			if err != nil {
+				panic(err)
+			}
 		}
 	}
 }
